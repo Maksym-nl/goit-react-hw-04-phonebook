@@ -9,11 +9,11 @@ import { NameLabel, Input } from './Form.styled';
 //     number: '',
 //   };
 
-export const Form = () => {
+export const Form = ({ addContact }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-    const reset = () => {
+  const reset = () => {
     setName('');
     setNumber('');
   };
@@ -23,14 +23,14 @@ export const Form = () => {
     setName({ [name]: value });
   };
 
- const handleOnSubmit = e => {
+  const handleOnSubmit = e => {
     e.preventDefault();
-   const addContact ({ name, number });
+    addContact({ name, number });
     reset();
     e.currentTarget.reset();
   };
 
- return (
+  return (
     <form onSubmit={handleOnSubmit}>
       <NameLabel>
         Name:

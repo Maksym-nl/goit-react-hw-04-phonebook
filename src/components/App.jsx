@@ -12,11 +12,11 @@ export const App = () => {
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
-    localStorage.setItem('id', JSON.stringify(contacts));
+    localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
   function getItems() {
-    const savedContacts = localStorage.getItem('id');
+    const savedContacts = localStorage.getItem('contacts');
     if (savedContacts !== null) {
       const contacts = JSON.parse(savedContacts);
       return contacts;
@@ -40,7 +40,7 @@ export const App = () => {
   // };
 
   const addContact = contact => {
-    const newContact = { ...contacts, id: nanoid() };
+    const newContact = { ...contact, id: nanoid() };
     if (
       contacts.find(
         contact => contact.name.toLowerCase() === contact.name.toLowerCase()
@@ -49,35 +49,38 @@ export const App = () => {
       alert(`${contact.name} is Exist`);
       return;
     }
-    setContacts(prevState => ({
-      contacts: [...prevState.contacts, newContact],
-    }));
-  };
-  const deletContact = contactId => {
-    setContacts(prevState =>
-      prevState.filter(contact => contact.id !== contactId)
+    setContacts(prevState => [...prevState.contacts, newContact]
     );
   };
-    // chanchFilter = e => {
-    //   this.setState({ filter: e.currentTarget.value });
-    // };
 
-    const chanchFilter = ({ currentTarget }) => {
-      setFilter(currentTarget.value);
-    };
-    // contactsFilter = this.state.contacts.filter(contact =>
-    //   contact.name.toLowerCase().includes(this.state.filter.toLowerCase())
-    // );
-    const contactsFilter = contacts.filter(contact =>
-        contact.name.toLowerCase().includes(filter.toLowerCase())
-      );
+  const deletContact = contactId => {
+    setContacts(contacts.filter(contact => contactId !== contactId))
+      ;
   };
+
+
+  
+  // chanchFilter = e => {
+  //   this.setState({ filter: e.currentTarget.value });
+  // };
+
+  const chanchFilter = (e) => {
+    setFilter(currentTarget.value);
+  }
+  
+  // contactsFilter = this.state.contacts.filter(contact =>
+  //   contact.name.toLowerCase().includes(this.state.filter.toLowerCase())
+  // );
+  const contactsFilter = contacts.filter(contact =>
+    contact.name.toLowerCase().includes(filter.toLowerCase())
+  );
+};
   
  
     // render() {
     //   const { filter } = this.state;
 
-    // const filtredContacts = contactsFilter();
+    //const filtredContacts = contactsFilter();
     return (
       <Layout>
         <Form addContact={addContact} />
