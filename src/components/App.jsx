@@ -49,46 +49,36 @@ export const App = () => {
       alert(`${contact.name} is Exist`);
       return;
     }
-    setContacts(prevState => [...prevState.contacts, newContact]
-    );
+    setContacts(prevState => [...prevState.contacts, newContact]);
   };
 
   const deletContact = contactId => {
-    setContacts(contacts.filter(contact => contactId !== contactId))
-      ;
+    setContacts(contacts.filter(contact => contactId !== contactId));
   };
 
-
-  
   // chanchFilter = e => {
   //   this.setState({ filter: e.currentTarget.value });
   // };
 
-  const chanchFilter = (e) => {
-    setFilter(currentTarget.value);
-  }
   
-  // contactsFilter = this.state.contacts.filter(contact =>
-  //   contact.name.toLowerCase().includes(this.state.filter.toLowerCase())
-  // );
-  const contactsFilter = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLowerCase())
-  );
-};
-  
- 
-    // render() {
-    //   const { filter } = this.state;
 
-    //const filtredContacts = contactsFilter();
+  const chanchFilter = e => {
+    setFilter({currentTarget.value });
+  };
+
+
+  const contactsFilter = () => {
+    setFilter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
+
     return (
       <Layout>
         <Form addContact={addContact} />
         <Filter value={filter} onChange={chanchFilter} />
-        <ContactList contacts={filtredContacts} onDelete={deletContact} />
+        <ContactList contacts={contactsFilter} onDelete={deletContact} />
         <GlobalStyle />
       </Layout>
-);
-    };
-  
-
+    );
+  };
+};
