@@ -39,21 +39,21 @@ export const App = () => {
   //   }));
   // };
 
-  const addContact = contact => {
-    const newContact = { ...contact, id: nanoid() };
+  const addContact = data => {
+    const newContact = { ...data, id: nanoid() };
     if (
       contacts.find(
-        contact => contact.name.toLowerCase() === contact.name.toLowerCase()
+        contact => contact.name.toLowerCase() === data.name.toLowerCase()
       )
     ) {
-      alert(`${contact.name} is Exist`);
+      alert(`${data.name} is Exist`);
       return;
     }
     setContacts(prevState => [...prevState.contacts, newContact]);
   };
 
-  const deletContact = contactId => {
-    setContacts(contacts.filter(contact => contactId !== contactId));
+  const deletContact = id => {
+    setContacts(prevState => prevState.filter(contact => contact.id !== id));
   };
 
   // chanchFilter = e => {
@@ -70,18 +70,22 @@ export const App = () => {
   //   );
   // };
 
-  const contactsFilter = () => {
+  // const contactsFilter = () => {
+  //   return contacts.filter(contact =>
+  //     contact.name.toLowerCase().includes(filter.toLowerCase())
+  //   );
+  // };
+  const contactsFilter = e => {
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );
   };
-  const test = contactsFilter();
-  console.log(test);
+
   return (
     <Layout>
       <Form addContact={addContact} />
       <Filter value={filter} onChange={chanchFilter} />
-      <ContactList contacts={contacts} onDelete={deletContact} />
+      <ContactList contacts={contactsFilter()} onDelete={deletContact} />
       <GlobalStyle />
     </Layout>
   );

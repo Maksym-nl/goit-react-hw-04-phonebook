@@ -23,15 +23,16 @@ export const Form = ({ addContact }) => {
   //   setName({ [name]: value });
   // };
   const handleInputChange = e => {
-    const { name, number } = e.target;
-    switch ((name, number)) {
-      case name:
-        'name';
+    const { name, value } = e.target;
+    switch (name) {
+      case 'name':
+        setName(value);
         break;
-      case number:
-        'number';
+      case 'number':
+        setName(value);
+        break;
       default:
-        break;
+        return;
     }
   };
   const handleOnSubmit = e => {
