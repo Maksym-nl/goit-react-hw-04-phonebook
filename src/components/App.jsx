@@ -8,7 +8,7 @@ import { Layout } from './Layout';
 import { useState, useEffect } from 'react';
 
 export const App = () => {
-  const [contacts, setContacts] = useState(getItems());
+  const [contacts, setContacts] = useState([getItems()]);
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
@@ -60,25 +60,29 @@ export const App = () => {
   //   this.setState({ filter: e.currentTarget.value });
   // };
 
-  
-
   const chanchFilter = e => {
-    setFilter({currentTarget.value });
+    setFilter(e.currentTarget.value);
   };
 
+  // const contactsFilter = () => {
+  //   setFilter(contact =>
+  //     contact.name.toLowerCase().includes(filter.toLowerCase())
+  //   );
+  // };
 
   const contactsFilter = () => {
-    setFilter(contact =>
+    return contacts.filter(contact =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );
-
-    return (
-      <Layout>
-        <Form addContact={addContact} />
-        <Filter value={filter} onChange={chanchFilter} />
-        <ContactList contacts={contactsFilter} onDelete={deletContact} />
-        <GlobalStyle />
-      </Layout>
-    );
   };
+  const test = contactsFilter();
+  console.log(test);
+  return (
+    <Layout>
+      <Form addContact={addContact} />
+      <Filter value={filter} onChange={chanchFilter} />
+      <ContactList contacts={contacts} onDelete={deletContact} />
+      <GlobalStyle />
+    </Layout>
+  );
 };

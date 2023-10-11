@@ -18,11 +18,22 @@ export const Form = ({ addContact }) => {
     setNumber('');
   };
 
+  // const handleInputChange = e => {
+  //   const { name, value } = e.target;
+  //   setName({ [name]: value });
+  // };
   const handleInputChange = e => {
-    const { name, value } = e.target;
-    setName({ [name]: value });
+    const { name, number } = e.target;
+    switch ((name, number)) {
+      case name:
+        'name';
+        break;
+      case number:
+        'number';
+      default:
+        break;
+    }
   };
-
   const handleOnSubmit = e => {
     e.preventDefault();
     addContact({ name, number });
