@@ -8,7 +8,7 @@ import { Layout } from './Layout';
 import { useState, useEffect } from 'react';
 
 export const App = () => {
-  const [contacts, setContacts] = useState([getItems()]);
+  const [contacts, setContacts] = useState(getItems());
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
@@ -49,8 +49,9 @@ export const App = () => {
       alert(`${data.name} is Exist`);
       return;
     }
-    setContacts(prevState => [...prevState.contacts, newContact]);
+    setContacts(prevState => [...prevState, newContact]);
   };
+  console.log(setContacts);
 
   const deletContact = id => {
     setContacts(prevState => prevState.filter(contact => contact.id !== id));
@@ -75,7 +76,7 @@ export const App = () => {
   //     contact.name.toLowerCase().includes(filter.toLowerCase())
   //   );
   // };
-  const contactsFilter = e => {
+  const contactsFilter = () => {
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );

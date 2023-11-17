@@ -41,7 +41,7 @@ export const BtnItem = styled.button`
   width: 100%;
   padding: 15px;
   font-size: 20px;
-  color: red;
+  color: green;
   font-weight: bold;
   cursor: pointer;
 `;

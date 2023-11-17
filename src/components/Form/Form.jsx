@@ -29,11 +29,12 @@ export const Form = ({ addContact }) => {
         setName(value);
         break;
       case 'number':
-        setName(value);
+        setNumber(value);
         break;
       default:
         return;
     }
+    console.log(number);
   };
   const handleOnSubmit = e => {
     e.preventDefault();
